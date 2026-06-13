@@ -27,4 +27,9 @@ test.describe('login functionality', async () => {
         await pinnedAccountPage.validatedragable();
     });
 
+    test('Should drag first card to second position', async ({ page }) => {
+        await pinnedAccountPage.dragFirstToSecond();
+        
+    });
+
 })

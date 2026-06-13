@@ -5,6 +5,7 @@ export class PinnedAccount {
     readonly page: Page;
     readonly pinnedtable: Locator;
     readonly pinnedaccounts: Locator;
+    readonly dropzone: Locator;
 
 
 
@@ -13,6 +14,7 @@ export class PinnedAccount {
         this.page = page;
         this.pinnedtable = this.page.locator('#pinned-accounts-drop-zone');
         this.pinnedaccounts = this.page.locator('[data-testid^="draggable-account-"]')
+        this.dropzone = this.page.locator('[data-testid="drop-zone"]');
 
     }
 
@@ -33,6 +35,28 @@ export class PinnedAccount {
 
 
         }
+
+    }
+
+    async dragFirstToSecond() {
+        const firstAccount = this.pinnedaccounts.nth(0);
+        const secondAccount = this.pinnedaccounts.nth(1);
+
+        const firstAccountText = await firstAccount.textContent();
+        const secondAccountText = await secondAccount.textContent();
+
+        await firstAccount.dragTo(secondAccount);
+
+        const firstAccountTextAfter = await firstAccount.textContent();
+        const secondAccountTextAfter = await secondAccount.textContent();   
+
+        expect(firstAccountTextAfter).toBe(secondAccountText);
+
+        await this.page.reload();
+        await this.page.waitForSelector('#pinned-accounts-drop-zone', { timeout: 10000 });
+        expect(firstAccountTextAfter).toBe(secondAccountText);
+
+
 
     }
 
