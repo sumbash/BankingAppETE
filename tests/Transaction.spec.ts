@@ -2,7 +2,7 @@ import { Page, test, expect } from '@playwright/test';
 import { LoginPage } from '../Pages/loginPage';
 import { TransactionPage } from '../Pages/transactiondata';
 
-test.describe('login functionality', async () => {
+test.describe('login functionality', () => {
 
     let loginPage: LoginPage;
     let transactionPage: TransactionPage;

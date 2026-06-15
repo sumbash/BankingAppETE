@@ -2,7 +2,7 @@ import { Page, test, expect } from '@playwright/test';
 import { LoginPage } from '../Pages/loginPage';
 import { PinnedAccount } from '../Pages/pinnedAccount';
 
-test.describe('login functionality', async () => {
+test.describe('login functionality', () => {
 
     let loginPage: LoginPage;
     let pinnedAccountPage: PinnedAccount;
@@ -25,6 +25,11 @@ test.describe('login functionality', async () => {
 
     test('Should validate draggable attributes', async ({ page }) => {
         await pinnedAccountPage.validatedragable();
+    });
+
+    test('Should drag first card to second position', async ({ page }) => {
+        await pinnedAccountPage.dragFirstToSecond();
+        
     });
 
 })
